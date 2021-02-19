@@ -1,4 +1,5 @@
-# For resizing a single image file
+# For compressing a single image file
+# We are using Pillow here for image processing
 import PIL
 from PIL import Image
 import os,sys
@@ -6,6 +7,8 @@ import os,sys
 # width = 300
 source_dir = "/home/darkcarnage/Videos/Pictures"
 dest_dir ='/home/darkcarnage/Videos/PicturesCompressed'
+
+# we can take this path of a folder via dialog, prompt which we will see later
 
 def resize_pic(pic, width):
     img = Image.open(source_dir+'/'+pic)
