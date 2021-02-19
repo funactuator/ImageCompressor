@@ -1,0 +1,24 @@
+#main_window
+{
+    background-color:black;
+}
+
+#bubble
+{
+    background-color:#202020;
+    min-height:100px;
+    min-width:300px;
+    max-height:100px;
+    max-width:300px;
+    border-radius:20px;
+}
+
+#bubble_expanded
+{
+    background-color:#202020;
+    min-height:350px;
+    min-width:300px;
+    max-height:350px;
+    max-width:300px;
+    border-radius:20px;
+}
