@@ -2,6 +2,7 @@ import sys
 import PyQt5
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QFrame,QLabel
 from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import Qt
 # import design
 class App(QMainWindow):
 
@@ -25,15 +26,14 @@ class App(QMainWindow):
         self.initUI()
         
     def initUI(self):
-        #---------------------------main_widow-----------------------------------
+        #----------------------------------------------------------------------main_widow-------------------------------------------------
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
 
-        # -----------------------first frame in main window on app starrt-----------------------
-        # ------------------------to resize a single image at once------------------------------
+        # -------------------file bubble in main window-------------------------------------------
         self.file_bubble=QFrame(self)
         self.file_bubble.setObjectName('bubble')
-        self.file_bubble.move(50,50)
+        self.file_bubble.move(50,100)
         self.file_bubble.mousePressEvent = self.file_bubble_clicked
 
         self.file_bubble_heading = QLabel(self.file_bubble)
@@ -46,13 +46,15 @@ class App(QMainWindow):
         self.file_bubble_para.move(55, 35)
         self.file_bubble_para.setText("Click Here to Compress One Image!")
         self.file_bubble_para.setWordWrap(True)
+        # -------------------------file bubble end------------------------------------------------
 
 
-        # -----------------------second  frame in main window on app starrt  ------------------
-        # -----------------------To compress whole folder at once------------------------------
+
+
+    # ---------------------------------Directory bubble in main window----------------------
         self.dir_bubble = QFrame(self)
         self.dir_bubble.setObjectName('bubble')
-        self.dir_bubble.move(50, 250)
+        self.dir_bubble.move(50, 300)
         self.dir_bubble.mousePressEvent = self.dir_bubble_clicked
 
         self.dir_bubble_heading = QLabel(self.dir_bubble)
@@ -66,7 +68,7 @@ class App(QMainWindow):
         self.dir_bubble_para.setText("Click Here to Compress all images of a folder!")
         self.dir_bubble_para.setWordWrap(True)
 
-
+    #--------------------------------Directory bubble expanded-----------------------------------
 
 
 
@@ -78,22 +80,40 @@ class App(QMainWindow):
         self.file_bubble_expanded = QFrame(self)
         self.file_bubble_expanded.setObjectName('bubble_expanded')
         self.file_bubble_expanded.move(50, 100)
-        # -----------initially they are said to false so that dont get visibel on app start-----------
+        # initially they are said to false so that dont get visibel on app start
         self.file_bubble_expanded.setVisible(False)
-        #---------------------file_bubble_expanded--------------------
+
+
+        self.back_arrow_file = QLabel(self.file_bubble_expanded)
+        self.back_arrow_file.setObjectName("back_arrow")
+        self.back_arrow_file.move(25, 0)
+        self.back_arrow_file.setTextFormat(Qt.RichText)
+        self.back_arrow_file.setText("&#8592;")
+        self.back_arrow_file.mousePressEvent = self.back_arrow_clicked
+        #---------------------file_bubble_expanded end-------------------------
+
 
         #---------------------dir_bubble_expanded ---> on cicking on second frame--------------------
         self.dir_bubble_expanded = QFrame(self)
         self.dir_bubble_expanded.setObjectName('bubble_expanded')
         self.dir_bubble_expanded.move(50, 100)
         self.dir_bubble_expanded.setVisible(False)
-        #---------------------dir_bubble_expanded--------------------
 
 
-        #----------------------------end main_window---------------------
+        self.back_arrow_dir = QLabel(self.dir_bubble_expanded)
+        self.back_arrow_dir.setObjectName("back_arrow")
+        self.back_arrow_dir.move(25, 0)
+        self.back_arrow_dir.setTextFormat(Qt.RichText)
+        self.back_arrow_dir.setText("&#8592;")
+        self.back_arrow_dir.mousePressEvent = self.back_arrow_clicked
+
+        #---------------------dir_bubble_expanded  end--------------------
+
+
+        #----------------------------end main_window-----------------------------------------------------------------
         
         self.show()
-        # ---------------------------Functionalities-----------------
+    # ---------------------------Functionalities-----------------
     def file_bubble_clicked(self, event):
         self.file_bubble.setVisible(False)
         self.dir_bubble.setVisible(False)
@@ -105,6 +125,12 @@ class App(QMainWindow):
         self.dir_bubble.setVisible(False)
         # print('Directory Bubble Clicked')
         self.dir_bubble_expanded.setVisible(True)
+    
+    def back_arrow_clicked(self, event):
+        self.file_bubble.setVisible(True)
+        self.dir_bubble.setVisible(True)
+        self.file_bubble_expanded.setVisible(False)
+        self.dir_bubble_expanded.setVisible(False)
 
     
 if __name__ == '__main__':

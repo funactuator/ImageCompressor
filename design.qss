@@ -35,3 +35,18 @@
     color:white;
     font-size :13px;
 }
+
+#back_arrow
+{
+    margin-top:5px;
+    border-radius:5%;
+    color:white;
+    font-size:25px;
+    font-weight:bold;
+}
+
+#back_arrow:hover
+{
+    background-color:white;
+    color:#202020;
+}
